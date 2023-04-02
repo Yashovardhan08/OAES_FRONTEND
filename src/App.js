@@ -15,12 +15,20 @@ function App() {
   return (
    <UserContext.Provider value ={[user,setUser]}>
     <div style={{display:"flex"}}>
-      <Routes>
-        <Route path="/search" element={<><Sidebar/><SearchPage/></>}/>
-        <Route path="/modify" element={<><Sidebar/><ModifyPage/></>}/>
-        <Route path="/delete" element={<><Sidebar/><DeletePage/></>}/>
-        <Route path="/add" element={<><Sidebar/><AddPage/></>}/>
+      <Routes >
         <Route path="/" element={<LoginPage/>}/>
+        <Route path="/search" element={
+             user!==null? <><Sidebar/><SearchPage/></>:<LoginPage/>
+        }/>
+        <Route path="/modify" element={
+             user!==null? <><Sidebar/><ModifyPage/></>:<LoginPage/>
+        }/>
+        <Route path="/delete" element={
+             user!==null? <><Sidebar/><DeletePage/></>:<LoginPage/>
+        }/>
+        <Route path="/add" element={
+             user!==null? <><Sidebar/><AddPage/></>:<LoginPage/>
+        }/>
       </Routes>
     </div>
    </UserContext.Provider>
