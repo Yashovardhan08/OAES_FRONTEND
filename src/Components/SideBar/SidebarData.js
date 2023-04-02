@@ -12,7 +12,7 @@ export const SideBarData = [
     {
         title: "Add",
         icon: <AddIcon/>,
-        link: "/add"
+        link: "/add",
     },
     {
         title: "Delete",
@@ -22,6 +22,6 @@ export const SideBarData = [
     {
         title: "Modify",
         icon: <EditIcon/>,
-        link: "/edit"
+        link: "/modify"
     }
 ]

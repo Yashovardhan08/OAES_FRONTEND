@@ -4,17 +4,16 @@
   background-color: #0d1321;
 }
 
+.pages {
+  background-color: #F0EBD8;
+  flex-grow: 1;
+  height: 100vh;
+}
+
 body {
   margin: 0;
   padding: 0;
 }
-
-.NavigationLinks {
-  align-items: center;
-  justify-content: center;
-  width: inherit;
-}
-
 .Title {
   width: inherit;
   color: #f8f4e3;
@@ -23,7 +22,4 @@ body {
 
 .TitleDiv {
   text-align: center;
-}
-
-.NavigationList {
 }
