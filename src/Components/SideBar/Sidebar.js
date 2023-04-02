@@ -1,13 +1,15 @@
 import "../../App.css";
 import NavigationItems from "./NavigationItems";
+import UserItem from "../UserDetails/UserItem";
 
 const Sidebar = (props) => {
   return (
     <div className="sidebar">
       {/* <UserDetails/> */}
-      <NavigationItems/>
+      <UserItem />
+      <NavigationItems />
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
