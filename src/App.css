@@ -5,9 +5,10 @@
 }
 
 .pages {
-  background-color: #F0EBD8;
+  background-color: #f0ebd8;
   flex-grow: 1;
   height: 100vh;
+  text-align: center;
 }
 
 body {
