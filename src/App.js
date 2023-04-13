@@ -9,11 +9,14 @@ import LoginPage from './Components/Pages/LoginPage';
 import { createContext, useState } from 'react';
 
 export const UserContext = createContext({user:null});
+export const QuestionContext = createContext({user:null});
 
 function App() {
   const [user,setUser] = useState(null);
+  const [questions,setQuestions] = useState([]);
   return (
    <UserContext.Provider value ={[user,setUser]}>
+   <QuestionContext.Provider value ={[questions,setQuestions]}>
     <div style={{display:"flex"}}>
       <Routes >
         <Route path="/" element={<LoginPage/>}/>
@@ -31,6 +34,7 @@ function App() {
         }/>
       </Routes>
     </div>
+   </QuestionContext.Provider>
    </UserContext.Provider>
   );
 }
