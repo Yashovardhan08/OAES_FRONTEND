@@ -15,7 +15,7 @@ const AddPage = (props) => {
   const handleSubmit = (event) => {
 
     if(type==="subjective"){
-      if(question.length!=0 && option1.length!=0 && option2.length!=0 && option3.length!=0 && correctOption.length!=0){
+      if(question.length!==0 && option1.length!==0 && option2.length!==0 && option3.length!==0  && option4.length !==0 && correctOption.length!==0){
         setQuestion("");
         setOption("");
         setOption1("");
