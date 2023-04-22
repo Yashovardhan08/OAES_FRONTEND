@@ -4,24 +4,25 @@ import {Routes,  Route } from 'react-router-dom';
 import AddPage from './Components/Pages/AddPage';
 import DeletePage from './Components/Pages/DeletePage';
 import ModifyPage from './Components/Pages/ModifyPage';
-import SearchPage from './Components/Pages/SearchPage';
+import AllQuestions from './Components/Pages/AllQuestions';
 import LoginPage from './Components/Pages/LoginPage';
 import { createContext, useState } from 'react';
+import {Questions} from './Components/Data/Questions.js';
 
 export const UserContext = createContext({user:null});
 export const QuestionContext = createContext({user:null});
 
 function App() {
   const [user,setUser] = useState(null);
-  const [questions,setQuestions] = useState([]);
+  const [questions,setQuestions] = useState(Questions);
   return (
    <UserContext.Provider value ={[user,setUser]}>
    <QuestionContext.Provider value ={[questions,setQuestions]}>
     <div style={{display:"flex"}}>
       <Routes >
         <Route path="/" element={<LoginPage/>}/>
-        <Route path="/search" element={
-             user!==null? <><Sidebar/><SearchPage/></>:<LoginPage/>
+        <Route path="/allQuestions" element={
+             user!==null? <><Sidebar/><AllQuestions/></>:<LoginPage/>
         }/>
         <Route path="/modify" element={
              user!==null? <><Sidebar/><ModifyPage/></>:<LoginPage/>

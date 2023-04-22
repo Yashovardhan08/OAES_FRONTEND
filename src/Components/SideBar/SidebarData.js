@@ -5,9 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 
 export const SideBarData = [
     {
-        title: "Search",
+        title: "All Questions",
         icon: <SearchIcon/>,
-        link: "/search"
+        link: "/allQuestions"
     },
     {
         title: "Add",

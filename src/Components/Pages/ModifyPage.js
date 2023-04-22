@@ -41,8 +41,8 @@ const ModifyPage = (props) => {
     }
   };
 
-  return <>
-    <Card sx={{margin:"auto",width:"40vw"}}>
+  return <div className="pages" style={{height:"100vh"}}>
+    <Card sx={{margin:"auto",marginTop:"20vh",width:"60vw"}}>
       <CardContent>
         <ToggleButtonGroup 
           sx={{display:'block'}}
@@ -77,7 +77,7 @@ const ModifyPage = (props) => {
       <Button onClick={handleSubmit} sx={{display:'block',margin:"auto",marginTop:"2vh"}} variant="contained">Submit</Button> 
       </CardContent>
     </Card>
-  </>;
+  </div>;
 };
 
 export default ModifyPage;

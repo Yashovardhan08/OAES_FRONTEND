@@ -5,7 +5,7 @@ import LogOutButton from "./LogOutButton";
 
 const Sidebar = (props) => {
   return (
-    <div className="sidebar" style={{display:"inline-block"}}>
+    <div className="sidebar" style={{display:"inline-block",position:"fixed"}}>
       <UserItem/>
       <NavigationItems />
       <LogOutButton/>

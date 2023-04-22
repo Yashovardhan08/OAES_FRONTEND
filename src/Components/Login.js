@@ -12,7 +12,7 @@ const Login = ({setRegister}) => {
   const login = (e) => {
     if(username==="")return;
     value[1](username);
-    navigate("/search");
+    navigate("/allQuestions");
   }
   
   return <div>

@@ -13,7 +13,7 @@ const DeletePage = (props) => {
     // alert("Wrong request with qid = ",qid);
   }
   return (
-    <div className="pages">
+    <div className="pages" style={{height:"100vh"}}>
       <TextField id="filled-basic" label="Enter question ID of the question to be deleted" variant="filled" sx={{width:"50vw",marginTop:"40vh"}} onChange={(text) => {console.log(text);setQid(parseInt(text.target.value))}}/>
       <Button onClick={handleSubmit} sx={{display:'block',margin:"auto",marginTop:"2vh"}} variant="contained">Submit</Button> 
     </div>

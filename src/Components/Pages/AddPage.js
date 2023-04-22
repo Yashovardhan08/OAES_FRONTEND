@@ -53,7 +53,8 @@ const AddPage = (props) => {
   };
 
   return (
-    <Card sx={{margin:"auto",width:"40vw"}}>
+    <div className="pages" style={{height:"100vh"}}>
+    <Card sx={{margin:"auto",marginTop:"20vh",width:"60vw"}}>
       <CardContent>
         <ToggleButtonGroup 
           sx={{display:'block'}}
@@ -87,6 +88,7 @@ const AddPage = (props) => {
       <Button onClick={handleSubmit} sx={{display:'block',margin:"auto",marginTop:"2vh"}} variant="contained">Submit</Button> 
       </CardContent>
     </Card>
+    </div>
     // <div className="pages">
     //   <form onSubmit={handleSubmit}>
     //     <TextField

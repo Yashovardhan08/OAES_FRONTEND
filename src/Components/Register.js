@@ -19,7 +19,7 @@ const Register = ({setRegister}) => {
     }
     // CALL DATABASE
     value[1](username);
-    navigate("/search");
+    navigate("/allQuestions");
   }
   
   return <div>
