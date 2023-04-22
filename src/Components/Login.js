@@ -1,67 +1,82 @@
 import { useNavigate } from "react-router";
 import { UserContext } from "./../App";
-import { useContext,useState } from "react";
+import { useContext, useState } from "react";
 import { Button, TextField } from "@mui/material";
+import { LoginDB } from "./connections";
 
-const Login = ({setRegister}) => {
+const Login = ({ setRegister }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const value = useContext(UserContext);
 
-  const login = (e) => {
-    if(username==="")return;
-    value[1](username);
-    navigate("/allQuestions");
-  }
-  
-  return <div>
-    <TextField
-        value={username} 
-        label="Username required" 
-        variant="outlined" 
+  const login = async (e) => {
+    e.preventDefault();
+    if (username === "" || password === "") return;
+    const ret = await LoginDB(username, password);
+    console.log("Return in login :" + ret);
+    if (ret) {
+      value[1](username);
+      navigate("/allQuestions");
+    }
+  };
+
+  return (
+    <div>
+      <TextField
+        value={username}
+        label="Username required"
+        variant="outlined"
         style={{
-            margin:"40vh 35vw 0px 35vw",
-            width:"30vw",
-            flex:"1"
+          margin: "40vh 35vw 0px 35vw",
+          width: "30vw",
+          flex: "1",
         }}
-        required 
+        required
         onChange={(e) => setUsername(e.target.value)}
-    />
-    <TextField
-        value={password} 
-        label="Password required" 
-        variant="outlined" 
+      />
+      <TextField
+        value={password}
+        label="Password required"
+        variant="outlined"
         style={{
-            margin:"2vh 35vw 0px 35vw",
-            width:"30vw",
-            flex:"1"
+          margin: "2vh 35vw 0px 35vw",
+          width: "30vw",
+          flex: "1",
         }}
-        required 
+        required
         type="password"
         onChange={(e) => setPassword(e.target.value)}
-    />
+      />
 
-    <div style={{display:"flex",flexDirection:"row",margin:"2vh 35vw 0vh 35vw"}}>
-        <Button 
-            style={{
-                flex:"1",
-                color:"black"
-            }}
-            onClick={login}>
-            LOGIN
-        </Button>
-        <Button 
+      <div
         style={{
-            flex:"1",
-            color:"black"
+          display: "flex",
+          flexDirection: "row",
+          margin: "2vh 35vw 0vh 35vw",
         }}
-        onClick={(e)=> setRegister(true)}>
-        REGISTER
-    </Button>
+      >
+        <Button
+          style={{
+            flex: "1",
+            color: "black",
+          }}
+          onClick={login}
+        >
+          LOGIN
+        </Button>
+        <Button
+          style={{
+            flex: "1",
+            color: "black",
+          }}
+          onClick={(e) => setRegister(true)}
+        >
+          REGISTER
+        </Button>
+      </div>
     </div>
-    
-  </div>;
-}
+  );
+};
 
-export default Login
+export default Login;
