@@ -8,6 +8,7 @@ import {
   ToggleButtonGroup,
 } from "@mui/material";
 import { UserContext } from "../../App";
+import { addQuestion } from "../connections";
 
 const AddPage = (props) => {
   const [type, setType] = useState("objective");
@@ -20,35 +21,41 @@ const AddPage = (props) => {
   const [option2, setOption2] = useState("");
   const [option3, setOption3] = useState("");
   const [option4, setOption4] = useState("");
+  const [answer,setAnswer] = useState("")
   const [correctOption, setOption] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    var username = {
-      type: type,
+    // console.log("question: ",question);
+    var q = {
+      version:1,
+      questionType: type,
       question: question,
       option1: option1,
       option2: option2,
       option3: option3,
       option4: option4,
+      answer:answer,
       correctOption: correctOption,
-      user_id: 1,
     };
+    const added = await addQuestion(q,userContext[0]);
+    console.log("Added question: ",added);
 
-    console.log(username);
-    const result = await fetch("http://localhost:8082/api/add", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: username,
-    }).then((res) => {
-      console.log(res);
-    });
-    console.log(result);
-  };
+  //   console.log(username);
+  //   const result = await fetch("http://localhost:8082/api/add", {
+  //     method: "POST",
+  //     mode: "cors",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: username,
+  //   }).then((res) => {
+  //     console.log(res);
+  //   });
+  //   console.log(result);
+  // };
+  }
 
   return (
     <div className="pages" style={{ height: "100vh" }}>
@@ -73,7 +80,8 @@ const AddPage = (props) => {
             id="filled-basic"
             label="Question"
             variant="filled"
-            onChange={(text) => setQuestion(text)}
+            value={question}
+            onChange={async(e) => { e.preventDefault(); setQuestion(e.target.value)}}
             multiline
             fullWidth
             sx={{ paddingTop: "1vh" }}
@@ -84,7 +92,7 @@ const AddPage = (props) => {
                 id="filled-basic"
                 label="Option 1"
                 variant="filled"
-                onChange={(text) => setOption1(text)}
+                onChange={(text) => setOption1(text.target.value)}
                 sx={{ display: "block", paddingTop: "1vh" }}
                 fullWidth
               ></TextField>
@@ -92,7 +100,7 @@ const AddPage = (props) => {
                 id="filled-basic"
                 label="Option 2"
                 variant="filled"
-                onChange={(text) => setOption2(text)}
+                onChange={(text) => setOption2(text.target.value)}
                 sx={{ display: "block", paddingTop: "1vh" }}
                 fullWidth
               ></TextField>
@@ -100,7 +108,7 @@ const AddPage = (props) => {
                 id="filled-basic"
                 label="Option 3"
                 variant="filled"
-                onChange={(text) => setOption3(text)}
+                onChange={(text) => setOption3(text.target.value)}
                 sx={{ display: "block", paddingTop: "1vh" }}
                 fullWidth
               ></TextField>
@@ -108,7 +116,7 @@ const AddPage = (props) => {
                 id="filled-basic"
                 label="Option 4"
                 variant="filled"
-                onChange={(text) => setOption4(text)}
+                onChange={(text) => setOption4(text.target.value)}
                 sx={{ display: "block", paddingTop: "1vh" }}
                 fullWidth
               ></TextField>
@@ -116,7 +124,7 @@ const AddPage = (props) => {
                 id="filled-basic"
                 label="Correct option"
                 variant="filled"
-                onChange={(text) => setOption(text)}
+                onChange={(text) => setOption(text.target.value)}
                 sx={{ display: "block", paddingTop: "1vh" }}
                 fullWidth
               ></TextField>
@@ -127,7 +135,7 @@ const AddPage = (props) => {
                 id="filled-basic"
                 label="Answer"
                 variant="filled"
-                onChange={(text) => setOption1(text)}
+                onChange={(text) => setAnswer(text.target.value)}
                 sx={{ display: "block", paddingTop: "1vh" }}
                 fullWidth
               ></TextField>

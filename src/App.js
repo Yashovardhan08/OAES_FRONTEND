@@ -14,7 +14,7 @@ export const QuestionContext = createContext({user:null});
 
 function App() {
   const [user,setUser] = useState(null);
-  const [questions,setQuestions] = useState(Questions);
+  const [questions,setQuestions] = useState([]);
   return (
    <UserContext.Provider value ={[user,setUser]}>
    <QuestionContext.Provider value ={[questions,setQuestions]}>
