@@ -13,15 +13,15 @@ export const SideBarData = [
         title: "Add",
         icon: <AddIcon/>,
         link: "/add",
-    },
-    {
-        title: "Delete",
-        icon: <DeleteIcon/>,
-        link: "/delete"
-    },
-    {
-        title: "Modify",
-        icon: <EditIcon/>,
-        link: "/modify"
     }
+    // {
+    //     title: "Delete",
+    //     icon: <DeleteIcon/>,
+    //     link: "/delete"
+    // },
+    // {
+    //     title: "Modify",
+    //     icon: <EditIcon/>,
+    //     link: "/modify"
+    // }
 ]
