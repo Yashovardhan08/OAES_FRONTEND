@@ -1,6 +1,9 @@
+
+
 export const LoginDB = async (username, password) => {
   var ret = false;
-  const result = await fetch("http://localhost:8696/login", {
+  const result = await fetch("http://localhost:8696/auth", {
+    // const result = await fetch(`${process.env.REACT_APP_DB_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +14,7 @@ export const LoginDB = async (username, password) => {
     .then(async (res) => {
       await res.json().then((v) => {
         console.log(" v in res.json: ", v);
-        ret = v;
+        ret = v.jwtToken;
       });
     })
     .catch((err) => {
@@ -25,6 +28,7 @@ export const LoginDB = async (username, password) => {
 export const registerDB = async (username, password) => {
   var ret = false;
   const result = await fetch("http://localhost:8696/addUser", {
+    // const result = await fetch(`${process.env.REACT_APP_DB_URL}/addUser`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -44,12 +48,16 @@ export const registerDB = async (username, password) => {
 };
 
 
-export const getQuestions = async() => {
+export const getQuestions = async(token) => {
   var ret = [];
+  // const token = "Bearer " + useContext(JWTContext)[0];
   const result = await fetch("http://localhost:8696/getAllQuestions", {
+    // const result = await fetch(`${process.env.REACT_APP_DB_URL}/getAllQuestions`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": token,
+
     },
     //   username,
   })
@@ -67,12 +75,14 @@ export const getQuestions = async() => {
 
 
 
-export const deleteQuestionByQid = async(qid) => {
+export const deleteQuestionByQid = async(qid,token) => {
   var ret = false;
   const result = await fetch("http://localhost:8696/deleteByQId", {
+    // const result = await fetch(`${process.env.REACT_APP_DB_URL}/deleteByQId`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": token,
     },
     body: qid,
   })
@@ -88,12 +98,14 @@ export const deleteQuestionByQid = async(qid) => {
     return ret;
 } 
 
-export const getUserId = async (username) => {
+export const getUserId = async (username,token) => {
   var ret = -1;
   const result = await fetch("http://localhost:8696/getUserId", {
+    // const result = await fetch(`${process.env.REACT_APP_DB_URL}/getUserId`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": token,
     },
     body: username,
   })
@@ -109,9 +121,9 @@ export const getUserId = async (username) => {
     return ret;
 }
 
-export const addQuestion= async(q,user) => {
+export const addQuestion= async(q,user,token) => {
   var ret = false;
-  const userId = await getUserId(user);
+  const userId = await getUserId(user,token);
   const qJson = await JSON.stringify({
     "question":q.question,
     "questionType":q.questionType,
@@ -125,9 +137,11 @@ export const addQuestion= async(q,user) => {
     "user_id":userId
   })
   const result = await fetch("http://localhost:8696/addQuestion", {
+    // const result = await fetch(`${process.env.REACT_APP_DB_URL}/addQuestion`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": token,
     },
     body:qJson,
   }).then(async (res) => {
@@ -143,9 +157,9 @@ export const addQuestion= async(q,user) => {
 
 
 
-export const modifyQuestion= async(question,user) => {
+export const modifyQuestion= async(question,user,token) => {
   var ret = false;
-  const userId = await getUserId(user);
+  const userId = await getUserId(user,token);
 console.log("userid : ",userId);
   const q = JSON.stringify({
     
@@ -163,9 +177,11 @@ console.log("userid : ",userId);
   });
   console.log("QUESTION BEING SENT TO MODIFY:",q);
   const result = await fetch("http://localhost:8696/modifyQuestion", {
+    // const result = await fetch(`${process.env.REACT_APP_DB_URL}/modifyQuestion`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": token,
     },
     body: q,
   })

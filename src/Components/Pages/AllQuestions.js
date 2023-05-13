@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { QuestionContext, UserContext } from "../../App";
+import { JWTContext, QuestionContext, UserContext } from "../../App";
 import Question from "../Question";
 import { Button } from "@mui/material";
 import { getQuestions, getUserId } from "../connections";
@@ -7,17 +7,21 @@ import { getQuestions, getUserId } from "../connections";
 const AllQuestions = (props) => {
   const questionContext = useContext(QuestionContext);
   const userContext = useContext(UserContext);
+  const JwtContext = useContext(JWTContext);
   const [userId,setUserId] = useState(-1);
   useEffect(() => {
       onRefresh(null);
   }, [])
   
   const onRefresh = async (e) => {
-    setUserId(await getUserId(userContext[0]));
+    const token = "Bearer "+ JwtContext[0];
+    console.log("Token ", token);
+
+    setUserId(await getUserId(userContext[0],token));
     const prevQuestions = questionContext[0];
     // console.log("Question context:",questionContext)
     // call api to get new questions
-    const dbQuestions = await getQuestions();
+    const dbQuestions = await getQuestions(token);
     // console.log("QUESTIONS RECIEVED :",dbQuestions )
     // const newQuestions = [...dbQuestions];
     await questionContext[1](dbQuestions);

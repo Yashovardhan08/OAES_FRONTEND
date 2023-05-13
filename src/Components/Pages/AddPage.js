@@ -7,13 +7,13 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import { UserContext } from "../../App";
+import { JWTContext, UserContext } from "../../App";
 import { addQuestion } from "../connections";
 
 const AddPage = (props) => {
   const [type, setType] = useState("objective");
   const userContext = useContext(UserContext);
-
+  const JwtContext = useContext(JWTContext);
   //   const [qid, questionID] = useState("");
   //   const [version, setVersion] = useState(1);
   const [question, setQuestion] = useState("");
@@ -39,7 +39,9 @@ const AddPage = (props) => {
       answer:answer,
       correctOption: correctOption,
     };
-    const added = await addQuestion(q,userContext[0]);
+    const token = "Bearer "+ JwtContext[0];
+    console.log("Token ", token);
+    const added = await addQuestion(q,userContext[0],token);
     console.log("Added question: ",added);
 
   //   console.log(username);

@@ -1,11 +1,13 @@
 import { TextField,Button } from "@mui/material";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useContext } from "react";
 import { useLocation } from "react-router";
 import { deleteQuestionByQid } from "../connections";
+import { JWTContext, QuestionContext, UserContext } from "../../App";
 
 const DeletePage = (props) => {
   const [qid,setQid] = useState(0);
   const qidSent = useLocation();
+  const JwtContext = useContext(JWTContext);
   useEffect(() => {
     console.log("LOCATION: ",qidSent)
     if(qidSent!=null){
@@ -15,7 +17,9 @@ const DeletePage = (props) => {
   
   const handleSubmit = async (e) => {
     if(qid!= null && qid>0){
-      const ret = await deleteQuestionByQid(qid);
+      const token = "Bearer "+ JwtContext[0];
+      console.log("Token :",token);
+      const ret = await deleteQuestionByQid(qid,token);
       // console.log(qid," being set to backend");
       if(ret)alert("Question with ID "+qid+" was deleted!");
       setQid(0);

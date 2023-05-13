@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { UserContext } from "./../App";
+import { JWTContext, UserContext } from "./../App";
 import { useContext, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { LoginDB } from "./connections";
@@ -9,6 +9,7 @@ const Login = ({ setRegister }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const value = useContext(UserContext);
+  const jwtContext = useContext(JWTContext);
 
   const login = async (e) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ const Login = ({ setRegister }) => {
     const ret = await LoginDB(username, password);
     console.log("Return in login :" + ret);
     if (ret) {
+      jwtContext[1](ret);
       value[1](username);
       navigate("/allQuestions");
     }

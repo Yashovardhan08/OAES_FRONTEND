@@ -11,11 +11,15 @@ import {Questions} from './Components/Data/Questions.js';
 
 export const UserContext = createContext({user:null});
 export const QuestionContext = createContext({user:null});
+export const JWTContext = createContext({token:null});
 
 function App() {
   const [user,setUser] = useState(null);
   const [questions,setQuestions] = useState([]);
+  const [jwt, setJwt] = useState(null);
   return (
+     <JWTContext.Provider value={[jwt,setJwt]}>
+
    <UserContext.Provider value ={[user,setUser]}>
    <QuestionContext.Provider value ={[questions,setQuestions]}>
     <div style={{display:"flex"}}>
@@ -37,6 +41,7 @@ function App() {
     </div>
    </QuestionContext.Provider>
    </UserContext.Provider>
+   </JWTContext.Provider>
   );
 }
 

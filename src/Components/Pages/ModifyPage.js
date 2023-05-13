@@ -2,13 +2,14 @@ import { useState,useEffect, useContext } from "react";
 import { Button, Card, CardContent, TextField, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useLocation } from "react-router";
 import { modifyQuestion } from "../connections";
-import { UserContext } from "../../App";
+import { JWTContext, UserContext } from "../../App";
 
 const ModifyPage = (props) => {
   const [qid, setQuestionID] = useState(0);
   const [type,setType] = useState("objective");
   const questionLocation = useLocation();
   const userContext = useContext(UserContext);
+  const jwtContext = useContext(JWTContext);
 
   const [question, setQuestion] = useState("");
   const [option1, setOption1] = useState("");
@@ -52,7 +53,9 @@ const ModifyPage = (props) => {
       qid: qid,
     }
     console.log("question BEING ASKED TO MODIFIED ", q.qid);
-    const mod = await modifyQuestion(q,userContext[0]);
+    const token = "Bearer " + jwtContext[0];
+    console.log("Token ", token);
+    const mod = await modifyQuestion(q,userContext[0],token);
     if(mod){// call to db is valid
       setQuestionID(0);
       setOption("");
